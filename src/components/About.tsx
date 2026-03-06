@@ -49,65 +49,71 @@ export default function About() {
 
                 {/* Right Side: Animated Diagram */}
                 <motion.div
-                    className="flex-1 w-full max-w-md relative"
+                    className="flex-1 w-full max-w-md lg:max-w-xl mx-auto relative h-[450px] md:h-[500px]"
                     initial={{ opacity: 0, scale: 0.95 }}
                     whileInView={{ opacity: 1, scale: 1 }}
                     transition={{ duration: 0.8 }}
                     viewport={{ once: true, amount: 0.3 }}
                 >
-                    <div className="glass p-8 rounded-3xl relative w-full h-[400px] flex items-center justify-center border border-white/10 group">
+                    <div className="glass p-4 md:p-8 rounded-3xl relative w-full h-full flex items-center justify-center border border-white/10 group overflow-hidden">
                         {/* Diagram Background Grid */}
-                        <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.04)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.04)_1px,transparent_1px)] bg-[size:20px_20px] rounded-3xl"></div>
+                        <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.03)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.03)_1px,transparent_1px)] bg-[size:30px_30px] rounded-3xl"></div>
 
-                        <div className="relative w-full h-full flex flex-col items-center justify-around">
-                            {/* Client/Frontend */}
-                            <div className="flex gap-4 z-10">
-                                <motion.div
-                                    initial={{ boxShadow: "0 0 10px rgba(255,255,255,0.1)" }}
-                                    animate={{ boxShadow: ["0 0 10px rgba(255,255,255,0.1)", "0 0 20px rgba(255,255,255,0.3)", "0 0 10px rgba(255,255,255,0.1)"] }}
-                                    transition={{ duration: 2, repeat: Infinity }}
-                                    className="bg-black border border-white/40 text-white px-6 py-2.5 rounded-sm font-mono text-sm tracking-wider uppercase"
-                                >
-                                    Client.UI
-                                </motion.div>
-                            </div>
+                        <div className="relative w-full h-full flex flex-col items-center py-12 px-4 justify-between">
+                            {/* SVG connections first for layering */}
+                            <svg className="absolute inset-0 w-full h-full pointer-events-none z-0" preserveAspectRatio="none" viewBox="0 0 400 500">
+                                {/* Lines */}
+                                <path d="M200 100 L200 200" stroke="rgba(255,255,255,0.2)" strokeWidth="1.5" strokeDasharray="4,4" />
+                                <path d="M200 250 L100 350" stroke="rgba(255,255,255,0.15)" strokeWidth="1.5" strokeDasharray="4,4" />
+                                <path d="M200 250 L300 350" stroke="rgba(255,255,255,0.15)" strokeWidth="1.5" strokeDasharray="4,4" />
 
-                            {/* API Layer */}
-                            <div className="relative z-10 bg-[#0a0a0a] border border-white/30 text-gray-200 px-8 py-3.5 rounded-sm font-mono uppercase flex items-center gap-2 shadow-[0_0_15px_rgba(255,255,255,0.05)]">
-                                <FaServer /> API_GATEWAY
-                            </div>
-
-                            {/* Data & Background Processing */}
-                            <div className="flex w-full justify-between px-4 z-10">
-                                <div className="bg-[#0a0a0a] border border-white/20 text-gray-300 px-5 py-2.5 rounded-sm font-mono flex flex-col items-center gap-1 shadow-sm text-xs uppercase tracking-wider">
-                                    <FaDatabase /> PG_SQL & REDIS
-                                </div>
-                                <div className="bg-[#0a0a0a] border border-white/15 text-gray-400 px-5 py-2.5 rounded-sm font-mono flex flex-col items-center gap-1 shadow-sm text-xs uppercase tracking-wider">
-                                    <FaCog /> WORKER_NODES
-                                </div>
-                            </div>
-
-                            {/* SVGs connecting the nodes */}
-                            <svg className="absolute inset-0 w-full h-full pointer-events-none z-0">
-                                <path d="M200 80 L200 160" stroke="rgba(255,255,255,0.2)" strokeWidth="1.5" strokeDasharray="4,4" />
-                                <motion.circle cx="200" cy="80" r="3" fill="white"
-                                    animate={{ cy: [80, 160] }}
-                                    transition={{ duration: 1.5, repeat: Infinity, ease: "linear" }}
+                                {/* Data particles */}
+                                <motion.circle r="3" fill="white"
+                                    animate={{ cy: [100, 200] }}
+                                    initial={{ cx: 200, cy: 100 }}
+                                    transition={{ duration: 2, repeat: Infinity, ease: "linear" }}
                                     style={{ filter: "drop-shadow(0 0 4px rgba(255,255,255,0.6))" }}
                                 />
-                                <path d="M160 210 L100 290" stroke="rgba(255,255,255,0.15)" strokeWidth="1.5" strokeDasharray="4,4" />
-                                <motion.circle cx="160" cy="210" r="2.5" fill="white"
-                                    animate={{ cx: [160, 100], cy: [210, 290] }}
-                                    transition={{ duration: 1.5, repeat: Infinity, ease: "linear", delay: 0.5 }}
+                                <motion.circle r="2.5" fill="white"
+                                    animate={{ cx: [200, 100], cy: [250, 350] }}
+                                    initial={{ cx: 200, cy: 250 }}
+                                    transition={{ duration: 2.5, repeat: Infinity, ease: "linear", delay: 0.5 }}
                                     style={{ filter: "drop-shadow(0 0 4px rgba(255,255,255,0.6))" }}
                                 />
-                                <path d="M240 210 L300 290" stroke="rgba(255,255,255,0.15)" strokeWidth="1.5" strokeDasharray="4,4" />
-                                <motion.circle cx="240" cy="210" r="2.5" fill="white"
-                                    animate={{ cx: [240, 300], cy: [210, 290] }}
-                                    transition={{ duration: 1.5, repeat: Infinity, ease: "linear", delay: 0.5 }}
+                                <motion.circle r="2.5" fill="white"
+                                    animate={{ cx: [200, 300], cy: [250, 350] }}
+                                    initial={{ cx: 200, cy: 250 }}
+                                    transition={{ duration: 2.5, repeat: Infinity, ease: "linear", delay: 1 }}
                                     style={{ filter: "drop-shadow(0 0 4px rgba(255,255,255,0.6))" }}
                                 />
                             </svg>
+
+                            {/* Client/Frontend */}
+                            <motion.div
+                                initial={{ boxShadow: "0 0 10px rgba(255,255,255,0.1)" }}
+                                animate={{ boxShadow: ["0 0 10px rgba(255,255,255,0.1)", "0 0 20px rgba(255,255,255,0.3)", "0 0 10px rgba(255,255,255,0.1)"] }}
+                                transition={{ duration: 3, repeat: Infinity }}
+                                className="z-10 bg-black border border-white/40 text-white px-5 py-2 md:px-8 md:py-3 rounded-sm font-mono text-xs md:text-sm tracking-wider uppercase mb-4"
+                            >
+                                Client.Interface
+                            </motion.div>
+
+                            {/* API Layer */}
+                            <div className="relative z-10 bg-[#070707] border border-white/30 text-gray-200 px-6 py-3 md:px-10 md:py-4 rounded-sm font-mono text-xs md:text-sm uppercase flex items-center gap-2 shadow-[0_0_20px_rgba(255,255,255,0.05)] my-4">
+                                <FaServer className="text-gray-400" /> API_CORE_PROX
+                            </div>
+
+                            {/* Data & Background Processing */}
+                            <div className="flex w-full justify-between items-end gap-3 md:gap-6 z-10 mt-4">
+                                <div className="flex-1 bg-[#0a0a0a] border border-white/20 text-gray-300 p-3 md:p-4 rounded-sm font-mono flex flex-col items-center gap-1.5 shadow-sm text-[10px] md:text-xs uppercase tracking-tighter md:tracking-wider text-center">
+                                    <FaDatabase className="text-gray-500 mb-1 text-base md:text-lg" />
+                                    <span>PG_SQL & REDIS</span>
+                                </div>
+                                <div className="flex-1 bg-[#0a0a0a] border border-white/15 text-gray-400 p-3 md:p-4 rounded-sm font-mono flex flex-col items-center gap-1.5 shadow-sm text-[10px] md:text-xs uppercase tracking-tighter md:tracking-wider text-center">
+                                    <FaCog className="text-gray-600 mb-1 text-base md:text-lg animate-spin-slow" />
+                                    <span>WORKER_NODES</span>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </motion.div>
